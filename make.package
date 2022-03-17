@@ -1,0 +1,19 @@
+#!/bin/bash
+# custom_payload
+DC=$(date +%y%m%d%H%M)
+SEQ=04
+PKG=custom_z7io_payload_acq424
+PACKAGES=../../PACKAGES
+
+echo 'scp peter@endor:/home/peter/CUSTOMER/CEA-SACLAY/*.tgz .'
+
+rm -Rf opkg/*
+mkdir -p release opkg/usr/local/init
+
+cp init/* opkg/usr/local/init
+
+tar cvzf release/${SEQ}-${PKG}-${DC}.tgz -C opkg .
+ls -l release/${SEQ}-${PKG}-${DC}.tgz
+rm -f ${PACKAGES}/${SEQ}-${PKG}*
+cp release/${SEQ}-${PKG}-${DC}.tgz ${PACKAGES}
+

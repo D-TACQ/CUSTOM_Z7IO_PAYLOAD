@@ -1,0 +1,14 @@
+#!/bin/sh
+
+echo +++ custom_z7io_payload_acq424.init 01
+
+mkdir -p /dev/gpio
+for site in 1 2
+do
+	mkdir -p /dev/sites/$site
+	cp /usr/local/init/CUSTOM_PMOD_1_E42410999.fru /dev/sites/$site/eeprom
+	echo 1 > /dev/gpio/pmod${site}_present
+done
+
+
+echo +++ custom_z7io_payload_acq424.init 99
