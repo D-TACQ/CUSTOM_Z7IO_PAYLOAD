@@ -1,14 +1,24 @@
 #!/bin/bash
 # custom_payload
 DC=$(date +%y%m%d%H%M)
-SEQ=04
+SEQ=02
 PKG=custom_z7io_payload_acq424
-PACKAGES=../../PACKAGES
+PACKAGES=../../PACKAGES.OPT
 
+rm -Rf opkg mnt
+mkdir -p release opkg/usr/local/init 
+
+echo 'refresh cal files like this:'
 echo 'scp peter@endor:/home/peter/CUSTOMER/CEA-SACLAY/*.tgz .'
+fn=$(ls -t acq424_cal*.tgz | head -n 1)
+echo "confirm correct file $fn\?"
+read yn
+[ "x$yn" != "xy" ] && exit 0
 
-rm -Rf opkg/*
-mkdir -p release opkg/usr/local/init
+mkdir -p mnt/cal
+tar xvzf $fn -C ./mnt/cal
+(cd ./mnt/cal; mksquashfs * ../../opkg/usr/local/init/acq424_cal.img)
+
 
 cp init/* opkg/usr/local/init
 

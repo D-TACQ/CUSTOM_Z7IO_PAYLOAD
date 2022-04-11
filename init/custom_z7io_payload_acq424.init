@@ -10,5 +10,9 @@ do
 	echo 1 > /dev/gpio/pmod${site}_present
 done
 
+mkdir -p /mnt/local/cal
+mount /usr/local/init/acq424_cal*img /mnt/local/cal
+
+echo "custom_z7io_payload=placeholder" > /tmp/u-boot_env
 
 echo +++ custom_z7io_payload_acq424.init 99
