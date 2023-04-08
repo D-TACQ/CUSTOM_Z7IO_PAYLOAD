@@ -6,7 +6,7 @@ PKG=custom_z7io_payload_acq424
 PACKAGES=../../PACKAGES.OPT
 
 rm -Rf opkg mnt
-mkdir -p release opkg/usr/local/init 
+mkdir -p release opkg/usr/local/init $PACKAGES
 
 echo 'refresh cal files like this:'
 echo 'scp peter@endor:/home/peter/CUSTOMER/CEA-SACLAY/*.tgz .'
